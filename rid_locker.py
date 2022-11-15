@@ -7,11 +7,7 @@ from itertools import islice
 import time
 import sys
 
-if '--interactive-mode' in sys.argv:
-    interactive_mode = True
-    print("Interactive mode enabled")
-else:
-    interactive_mode = False
+interactive_mode = '--interactive-mode' in sys.argv
 
 #Interactive mode - get variables
 if interactive_mode:
