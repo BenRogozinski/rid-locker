@@ -28,4 +28,4 @@ def test_list(s, url, username, password_list):
             with open('password', 'w') as f:
                 f.write(parsed_password)
         #Print info to output
-        print(username, ":","Testing", parsed_password[0:30].ljust(30), valid_pass)
+        print(username.ljust(20), ":","Testing", parsed_password[0:30].ljust(30), valid_pass)

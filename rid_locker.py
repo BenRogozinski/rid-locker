@@ -18,7 +18,7 @@ if interactive_mode:
 
     print("Accounts to be locked:")
 
-    for username in name_list:
+    for username in [x for x in name_list if not x.startswith('#')]:
         print(username)
 
     print("Locking in 10 seconds, press Ctrl+C to cancel")
@@ -33,7 +33,7 @@ else:
     thread_count = 100
     words_per_thread = 100
 
-name_list_parsed = content = [x for x in name_list if not x.startswith('#')]
+name_list_parsed = [x for x in name_list if not x.startswith('#')]
 
 #Set static variables
 api_url = "https://portal.id.cps.edu/api/rest/authn"
