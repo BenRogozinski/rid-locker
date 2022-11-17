@@ -27,5 +27,3 @@ def test_list(s, url, username, password_list):
         parsed_password = password.strip("\n")
         #Check if password valid
         valid_pass = test_creds(s, url, username, parsed_password)
-        #Print info to output
-        #print(username.ljust(20), ":","Testing", parsed_password[0:30].ljust(30), valid_pass)
