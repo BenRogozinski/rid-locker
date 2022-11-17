@@ -25,5 +25,5 @@ def test_list(s, url, username, password_list):
     for password in password_list:
         #Strip out newline characters
         parsed_password = password.strip("\n")
-        #Check if password valid
+        #Check if password is valid
         valid_pass = test_creds(s, url, username, parsed_password)
