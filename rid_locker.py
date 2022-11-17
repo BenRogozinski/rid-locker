@@ -22,7 +22,7 @@ thread_count = 10
 words_per_thread = 10
 #Wordlist file
 wordlist = '/mnt/data/rid-locker/all_in_one_w'
-#TIme to wait between each account (IN seconds)
+#TIme to wait between each account (In seconds)
 delay_time = 1
 
 for username in name_list_parsed:
