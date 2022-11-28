@@ -18,12 +18,10 @@ def test_creds(s, url, username, password, log=False):
     if valid:
         with open('password', 'w') as f:
             f.write(parsed_password)
-    return valid
+    return
 
 #For batch password testing
 def test_list(s, url, username, password_list):
     for password in password_list:
-        #Strip out newline characters
-        parsed_password = password.strip("\n")
         #Check if password is valid
-        valid_pass = test_creds(s, url, username, parsed_password)
+        valid_pass = test_creds(s, url, username, password)
