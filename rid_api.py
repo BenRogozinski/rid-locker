@@ -17,8 +17,7 @@ def test_creds(s, url, username, password, log=False):
     #Log password to file if, by some miracle, it actually guesses it right
     if valid:
         with open('password', 'w') as f:
-            f.write(parsed_password)
-    return
+            f.write(password)
 
 #For batch password testing
 def test_list(s, url, username, password_list):
