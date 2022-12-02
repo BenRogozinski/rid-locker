@@ -11,7 +11,7 @@ import random
 #Portal API URL
 api_url = "https://portal.id.cps.edu/api/rest/authn"
 #Username list file
-name_file = open("/mnt/data/rid-locker/account_list")
+name_file = open("account_list")
 name_list = name_file.read().splitlines()
 name_list_parsed = [x for x in name_list if not x.startswith('#')]
 #Thread settings
