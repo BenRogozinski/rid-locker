@@ -2,7 +2,7 @@
 
 import requests
 
-def test_creds(s, url, username, password, log=False):
+def test_creds(s, url, username, password):
     #Get id from server
     id = s.get(url).json()['id']
     #Post username and password to server
