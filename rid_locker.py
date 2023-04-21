@@ -9,7 +9,7 @@ import sys
 import random
 
 #Portal API URL
-api_url = "https://portal.id.cps.edu/api/rest/authn"
+api_url = "[Login portal USL]/api/rest/authn"
 #Username list file
 name_file = open("account_list")
 name_list = name_file.read().splitlines()
